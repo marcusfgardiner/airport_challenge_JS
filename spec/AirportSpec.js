@@ -5,10 +5,17 @@ describe('Airport', function() {
     airport = new Airport();
     plane = {};
   });
-  describe('an instance of airport', function() {
+  describe('Airport.land', function() {
     it('can land a plane', function() {
-      airport.landPlane(plane);
+      airport.land(plane);
       expect(airport.hangar).toContain(plane);
+    });
+  });
+  describe('Airport.takeOff', function() {
+    it('can take off a plane', function(){
+      airport.land(plane);
+      airport.takeOff(plane);
+      expect(airport.hangar).not.toContain(plane);
     });
   });
 });
