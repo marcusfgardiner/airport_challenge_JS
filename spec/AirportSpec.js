@@ -1,8 +1,10 @@
 describe('Airport', function() {
   var airport;
   var plane;
+  var weather;
   beforeEach(function() {
     airport = new Airport();
+    weather =  new Weather();
     plane = {};
   });
   describe('.land', function() {
@@ -13,9 +15,19 @@ describe('Airport', function() {
   });
   describe('.takeOff', function() {
     it('can take off a plane', function(){
+      // spyOn(Math, 'random').and.returnValue(0.1);
+      spyOn(weather, 'isStormy').and.returnValue(false);
       airport.land(plane);
-      airport.takeOff(plane);
+      airport.takeOff(plane, weather);
       expect(airport.hangar).not.toContain(plane);
     });
+    it("won't take off when stormy", function() {
+      console.log(airport);
+      airport.land(plane);
+      // spyOn(Math, 'random').and.returnValue(0.8);
+      spyOn(weather, 'isStormy').and.returnValue(true);
+      expect( function(){ airport.takeOff(plane, weather); } ).toThrow('The weather is crazy');
+    });
   });
+
 });
