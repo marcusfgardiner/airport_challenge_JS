@@ -1,10 +1,7 @@
 var Airport = function() {
+  this.hangar = []
 };
 
-Airport.prototype.landPlane = function () {
-  return "hello";
+Airport.prototype.landPlane = function (plane) {
+  return this.hangar.push(plane);
 };
-//
-// var airport = new Airport;
-//
-// console.log(airport.landPlane());
